@@ -35,23 +35,19 @@ public class BasePage {
         dismissAlertIfPresent();
 
         List<By> popupLocators = List.of(
-                By.xpath("//*[contains(text(),'Change your password')]//button[normalize-space()='OK']"),
-                By.xpath("//button[normalize-space()='OK']"),
-                By.xpath("//button[contains(@aria-label,'Close') or contains(@title,'Close') or contains(@class,'close')]"),
-                By.xpath("//button[normalize-space()='Close']"),
-                By.xpath("//a[contains(@class,'close') or contains(@data-test,'close')]"),
-                By.xpath("//*[contains(@class,'notification') or contains(@class,'toast')]//button[contains(.,'Close')]"),
-                By.xpath("//button[contains(@id,'close') or contains(@data-test,'close')]"),
-                By.xpath("//div[contains(@class,'modal')]//button[contains(.,'Close')]")
+                By.xpath("//*[contains(text(),'Change your password') or contains(text(),'password')]//button[normalize-space()='OK' or normalize-space()='Close']"),
+                By.xpath("//div[contains(@class,'modal') or contains(@role,'dialog')]//button[normalize-space()='OK' or normalize-space()='Close']")
         );
 
         for (By locator : popupLocators) {
             try {
-                WebElement element = waitForClickable(locator);
-                if (element.isDisplayed()) {
-                    element.click();
+                List<WebElement> elements = driver.findElements(locator);
+                for (WebElement element : elements) {
+                    if (element.isDisplayed()) {
+                        element.click();
+                    }
                 }
-            } catch (TimeoutException | NoSuchElementException | ElementClickInterceptedException ignored) {
+            } catch (NoSuchElementException | ElementClickInterceptedException ignored) {
                 // No popup present on this page.
             }
         }
