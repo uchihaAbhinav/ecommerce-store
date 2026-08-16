@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="ECommerceSuite" verbose="1" parallel="false">
+    <listeners>
+        <listener class-name="com.store.hooks.FailureReporter"/>
+    </listeners>
+    <test name="ECommerceFunctionalTests">
+        <classes>
+            <class name="com.store.runner.TestRunner"/>
+        </classes>
+    </test>
+</suite>

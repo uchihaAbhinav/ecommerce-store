@@ -1,0 +1,29 @@
+# Maven build output
+/target/
+**/target/
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+
+# Java compiled files
+*.class
+
+# Logs
+*.log
+
+# Operating system
+.DS_Store
+Thumbs.db
+
+# Test artifacts and screenshots
+/screenshots/
+**/screenshots/
+/videos/
+**/videos/
+
+# Local env / temporary files
+*.tmp
+*.pid
+*.swp
