@@ -18,6 +18,21 @@ public class DriverFactory {
             options.addArguments("--disable-gpu");
             options.addArguments("--no-sandbox");
             options.addArguments("--disable-dev-shm-usage");
+            options.addArguments("--incognito");
+            options.addArguments("--disable-extensions");
+            options.addArguments("--disable-notifications");
+            options.addArguments("--disable-popup-blocking");
+            options.addArguments("--disable-features=PasswordLeakDetection");
+            options.addArguments("--disable-password-manager-onboarding");
+            options.addArguments("--no-default-browser-check");
+
+            String osName = System.getProperty("os.name").toLowerCase();
+            if (osName.contains("linux")) {
+                options.addArguments("--headless=new");
+                options.addArguments("--remote-debugging-port=9222");
+            }
+
+            options.setExperimentalOption("useAutomationExtension", false);
             WebDriver webDriver = new ChromeDriver(options);
             webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
             webDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
